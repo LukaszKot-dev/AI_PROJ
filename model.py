@@ -1,6 +1,9 @@
-from keras.models import Model
-from keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, concatenate, Conv2DTranspose, BatchNormalization, \
+from tensorflow.python import keras
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, concatenate, Conv2DTranspose, BatchNormalization, \
     Dropout, Lambda
+# from keras.optimizers import Adam
+# from keras.metrics import MeanIoU
 
 def simple_unet_model(IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS):
     # Build the model
@@ -62,6 +65,7 @@ def simple_unet_model(IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS):
 
     model = Model(inputs=[inputs], outputs=[outputs])
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    #model.compile(optimizer=Adam(lr = 1e-3), loss='binary_crossentropy', metrics=[MeanIoU(num_classes=2)])
     model.summary()
 
     return model
